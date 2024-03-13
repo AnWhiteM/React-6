@@ -1,5 +1,7 @@
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
+
+import { contactsReducer } from './contactsSlice';
 import { filtersReducer } from './filtersSlice';
 
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
@@ -12,10 +14,8 @@ const Config = {
   
   const Reducer = combineSlices({
     filters: filtersReducer,
-    contacts: persistReducer(Config, Reducer),
+    contacts: persistReducer(Config, contactsReducer),
   });
-  
-  persistReducer(Config, Reducer);
 
   export const store = configureStore({
     reducer: Reducer,
